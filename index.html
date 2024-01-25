@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Your Website Title</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+        <script src="ressurser.js"></script>
+    </head>
+<body>
+    
+    <div class="container">
+        <div class="tab-container">
+            <ul class="tab-menu">
+                
+            </ul>
+        </div>
+        <main>
+            <div class="resource-details">
+            
+            </div>
+        </main>
+    </div>
+
+    <script>
+        //Få tilgang og hente informasjon fra js ressurserdata//
+        const resources = resource;
+
+        // Generate tab links
+        const tabMenu = document.querySelector('.tab-menu'); //Henter html klassen "tabmenu og lagrer den som variabelen tabMenu"
+        
+        //Løkke som går gjennom hver elementet i arrayet resources. 
+        resources.forEach((category, index) => { 
+            const tabLink = document.createElement('li'); //oppretter en listeelement 
+            tabLink.textContent = category.category; //Setter teksten inn i listet som hentes fra category
+            
+            //Lager en klikkhendelse til hvert listelement. Her vil displayResources bli kalt på med category og index som argumenter.  category referere til et objekt fra resources-arrayet, og index vil være indeksen til det aktuelle objektet i arrayet.
+            tabLink.addEventListener('click', () => { 
+                displayResources(category, index);
+            });
+            tabMenu.appendChild(tabLink); // Denne legger til det opprettede listeelementet i HTML-elementet med klassen "tab-menu".
+        });
+
+        // Vis første ressursene til den første kategorien på nettsiden, uten denne ville ikke html og lenkene vist før du trykker på de.
+        const firstCategory = resources[0];
+        displayResources(firstCategory, 0);
+
+        // Funksjon for å vise ressursdetaljer
+        function displayResources(category, index) {
+            const resourceDetails = document.querySelector('.resource-details');
+            resourceDetails.innerHTML = ''; // Slett tidligere innhold
+
+            // Lage elementer for kategoritittel, beskrivelse og kilder
+            const titleElement = document.createElement('h2');  //Denne linjen oppretter et nytt HTML-element av typen <h2>
+            titleElement.textContent = category.category; // Her blir teksten til overskriftselementet (titleElement) satt til verdien av category.category. Så den henter overskriften fra hver category som for eksempel category ="HTML"
+            resourceDetails.appendChild(titleElement); 
+
+            const descriptionElement = document.createElement('p'); //oppretter et nytt HTML-element av typen <p>,
+            descriptionElement.textContent = category.text; // her blir(descriptionElement) satt til verdien av category.text. Denne teksten hentes fra den gjeldende ressurskategorien og representerer beskrivelsen av kategorien, altså text.
+            resourceDetails.appendChild(descriptionElement);
+
+            const sourcesList = document.createElement('ul'); //oppretter et nytt HTML-ul-element, som er en uordnet liste.
+            category.sources.forEach(source => { //Dette er en løkke som går gjennom hvert element i category.sources-arrayet. Hvert element representerer en kilde for den gjeldende ressurskategorien.
+                const sourceItem = document.createElement('li'); //: Inne i løkken opprettes et nytt HTML-li-element for hver kilde. Dette er et element i den uordnede listen som vil inneholde lenken til kilden.
+                const sourceLink = document.createElement('a'); // Dette oppretter en ny HTML-a-element, som er en lenke.
+                sourceLink.href = source.url;
+                sourceLink.textContent = source.title; //: Dette setter teksten til lenken til tittelen på kilden, som er hentet fra source.title.
+                sourceItem.appendChild(sourceLink); //Lenken blir lagt til som et barn av li-elementet.
+                sourcesList.appendChild(sourceItem); // Hele li-elementet blir deretter lagt til som et barn av ul-elementet.
+            });
+            resourceDetails.appendChild(sourcesList); //her legges uordnede listen (sourcesList) som et barn av HTML-elementet med klassen "resource-details".
+
+           // Fjerne aktiv klasse fra alle faner
+            const tabs = document.querySelectorAll('.tab-menu li');
+            tabs.forEach((tab) => {
+                tab.classList.remove('active');
+            });
+
+            // Legge til en aktiv klasse i den klikkede fanen
+            const clickedTab = tabs[index];
+            clickedTab.classList.add('active');
+        }
+    </script>
+</body>
+</html>

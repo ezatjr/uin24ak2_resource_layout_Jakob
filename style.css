@@ -1,0 +1,77 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #E1E5EE;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
+
+.container {
+    background-color: #fff;
+    height: 45%;
+    width: 75%; 
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+main {
+    margin: 20px 0; 
+}
+
+.tab-container {
+    background-color: #E1E5EE;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tab-menu {
+    height:65px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between; 
+    width: 100%;
+}
+
+.tab-menu li {
+    flex-basis: calc(20% - 10px);
+    background-color: #2A324B;
+    font-weight:600;
+    padding: 10px;
+    padding-top:26px;
+    margin-right: 0px;
+    cursor: pointer;
+    color: #fff; 
+    text-align: center; 
+}
+
+.tab-menu li:not(:last-child) {
+    margin-right: 10px;
+}
+
+.tab-menu li.active {
+    background-color: #fff;
+    color: #000; 
+}
+
+.tab-menu li:active {
+    background-color: #fff;
+    color: #000; 
+}
+
+.tab-menu li a:visited {
+    color: #fff; 
+}
+
+.resource-details {
+    margin: 50px;
+}
